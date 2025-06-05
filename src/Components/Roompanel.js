@@ -193,7 +193,7 @@ export default function RoomPanel() {
           <button onClick={handleGenerateQR}>Generate QR Code</button>
           {showQRCode && (
             <div className="qr-container">
-              <QRCodeCanvas value={`${localIP}/?roomCode=${roomCode}`} />
+              <QRCodeCanvas value={`https://requestify-frontend.vercel.app/?roomCode=${roomCode}`} />
               <button className="qr-hide-button" onClick={handleHideQR}>
                 Hide QR Code
               </button>
