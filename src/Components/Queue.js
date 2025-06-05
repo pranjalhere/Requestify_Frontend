@@ -7,7 +7,7 @@ export default function Queue({ roomCode, userId, queue, setQueue }) {
   useEffect(() => {
     if (!roomCode || !localIP) return;
 
-    const ws = new WebSocket(`wss://${localIP}`);
+    const ws = new WebSocket("wss://requestify.onrender.com");
 
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: "subscribe", roomCode }));

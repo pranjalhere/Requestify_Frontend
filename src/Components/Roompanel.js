@@ -22,7 +22,7 @@ export default function RoomPanel() {
   const [queue, setQueue] = useState([]);
 
   const localIP = process.env.REACT_APP_LOCAL_IP;
-  const WS_URL = `wss://${localIP}`;
+  const WS_URL = "wss://requestify.onrender.com";
 
   const ws = useRef(null);
   // check for user and verify admin
