@@ -8,7 +8,6 @@ import Queue from "./Queue";
 import RoomContext from '../Context/RoomContext';
 import "./roompanel.css";
 
-const port = "3000";
 
 export default function RoomPanel() {
   const { roomCode } = useParams();
@@ -23,7 +22,7 @@ export default function RoomPanel() {
   const [queue, setQueue] = useState([]);
 
   const localIP = process.env.REACT_APP_LOCAL_IP;
-  const WS_URL = `ws://${localIP}:8000`;
+  const WS_URL = `wss://${localIP}`;
 
   const ws = useRef(null);
   // check for user and verify admin
@@ -39,7 +38,7 @@ export default function RoomPanel() {
 
   const verifyAdmin = async (userId, roomCode) => {
     try {
-      const response = await fetch(`http://${localIP}:8000/verifyadmin`, {
+      const response = await fetch(`${localIP}/verifyadmin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, roomCode }),
@@ -93,7 +92,7 @@ export default function RoomPanel() {
 
   const fetchQueue = async () => {
     try {
-      const res = await fetch(`http://${localIP}:8000/getqueue?roomCode=${roomCode}`);
+      const res = await fetch(`${localIP}/getqueue?roomCode=${roomCode}`);
       const data = await res.json();
       if (data.success) {
         setQueue(data.queue);
@@ -109,7 +108,7 @@ export default function RoomPanel() {
   const handleDeleteRoom = async () => {
     if (window.confirm("Are you sure you want to delete this room?")) {
       try {
-        await fetch(`http://${localIP}:8000/deleteroom`, {
+        await fetch(`${localIP}/deleteroom`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ roomCode }),
@@ -129,7 +128,7 @@ export default function RoomPanel() {
     setIsPlaying(true);
 
     try {
-      await fetch(`http://${localIP}:8000/removesong`, {
+      await fetch(`${localIP}/removesong`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ roomCode, videoId }),
@@ -163,7 +162,7 @@ export default function RoomPanel() {
   const handleEmptyQueue = async () => {
     if (window.confirm("Are you sure you want to empty the queue?")) {
       try {
-        await fetch(`http://${localIP}:8000/emptyqueue`, {
+        await fetch(`${localIP}/emptyqueue`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ roomCode }),
@@ -194,7 +193,7 @@ export default function RoomPanel() {
           <button onClick={handleGenerateQR}>Generate QR Code</button>
           {showQRCode && (
             <div className="qr-container">
-              <QRCodeCanvas value={`http://${localIP}:${port}/?roomCode=${roomCode}`} />
+              <QRCodeCanvas value={`${localIP}/?roomCode=${roomCode}`} />
               <button className="qr-hide-button" onClick={handleHideQR}>
                 Hide QR Code
               </button>

@@ -20,7 +20,7 @@ export default function Home() {
 
     const fetchUserRoom = async (userId) => {
         try {
-            const response = await fetch(`http://${localIP}:8000/getuserroom`, {
+            const response = await fetch(`${localIP}/getuserroom`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

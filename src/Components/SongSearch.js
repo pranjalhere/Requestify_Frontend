@@ -42,7 +42,7 @@ export default function SongSearch({ roomCode }) {
         const thumbnail = video.snippet.thumbnails.default.url;
 
         try {
-            const res = await fetch(`http://${localIP}:8000/addsong`, {
+            const res = await fetch(`${localIP}/addsong`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

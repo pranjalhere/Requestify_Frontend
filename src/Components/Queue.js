@@ -7,7 +7,7 @@ export default function Queue({ roomCode, userId, queue, setQueue }) {
   useEffect(() => {
     if (!roomCode || !localIP) return;
 
-    const ws = new WebSocket(`ws://${localIP}:8000`);
+    const ws = new WebSocket(`wss://${localIP}`);
 
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: "subscribe", roomCode }));
@@ -40,7 +40,7 @@ export default function Queue({ roomCode, userId, queue, setQueue }) {
 
   const handleVoteUp = async (videoId) => {
     try {
-      const res = await fetch(`http://${localIP}:8000/voteup`, {
+      const res = await fetch(`${localIP}/voteup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ roomCode, videoId, userId }),

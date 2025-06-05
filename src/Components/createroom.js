@@ -22,7 +22,7 @@ export default function CreateRoomModal() {
 
     const roomCode = Math.random().toString(36).substr(2, 6);
     try {
-      const response = await fetch(`http://${localIP}:8000/createroom`, {
+      const response = await fetch(`${localIP}/createroom`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
