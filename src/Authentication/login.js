@@ -11,7 +11,7 @@ export default function Login() {
       
         e.preventDefault();
         const  {email,password}=credentials;
-        const response = await fetch(`http://${localIP}/login`, {
+        const response = await fetch(`${localIP}/login`, {
             method: "POST", 
             headers:{
               "Content-Type": "application/json",

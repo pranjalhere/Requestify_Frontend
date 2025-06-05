@@ -10,7 +10,7 @@ export default function Signup() {
     const Submit = async(e)=>{
       e.preventDefault();
       const  {username,email,password}=credentials;
-      const response = await fetch(`http://${localIP}/signup`, {
+      const response = await fetch(`${localIP}/signup`, {
          
           method: "POST", 
           headers:{
